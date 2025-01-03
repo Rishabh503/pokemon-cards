@@ -4,6 +4,7 @@ import { PokemonCards } from "./PokemonCard.jsx";
 export const Pokemon=()=>{
     const[pokemon,setPokemon]=useState([]);
     const[loading,setLoading]=useState(true);
+    const[error,setError]=useState(null);
     
     const API= "https://pokeapi.co/api/v2/pokemon?limit=24";
 
@@ -30,6 +31,7 @@ export const Pokemon=()=>{
     }catch(error){
         console.log(error);
         setLoading(false);
+        setError(error)//we catched the error here and set the error once this is set the site will re render and the data we will get ewill be a null than nothing 
     }
     }
 
@@ -41,6 +43,15 @@ export const Pokemon=()=>{
         return(
             <div>
                 <h1>aara hai data bhnchd...</h1>
+            </div>
+        )
+    }
+    
+
+    if(error){
+        return(
+            <div>
+                <h1>{error.message}</h1>
             </div>
         )
     }
